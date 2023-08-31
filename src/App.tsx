@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { AuthProvider } from './features/components/router_components/Auth';
+import {
+  AuthProvider,
+  useAuth,
+} from './features/components/router_components/Auth';
 //import About from './features/components/router_components/About';
 import { Contact } from './features/components/router_components/Contact';
 import { Home } from './features/components/router_components/Home';
@@ -11,6 +14,7 @@ import { Products } from './features/components/router_components/Products';
 import { Featured } from './features/components/router_components/product_feature/Featured';
 import { News } from './features/components/router_components/product_feature/New';
 import { Profile } from './features/components/router_components/Profile';
+import { RequireAuth } from './features/components/router_components/RequireAuth';
 import { Stopwatch } from './features/components/Stopwatch';
 import './style.css';
 const LazyAbout = React.lazy(() =>
@@ -40,7 +44,14 @@ export default function App() {
             <Route path="featured" element={<Featured />} />
             <Route path="new" element={<News />} />
           </Route>
-          <Route path="/profile" element={<Profile />} />
+          <Route
+            path="/profile"
+            element={
+              <RequireAuth>
+                <Profile />
+              </RequireAuth>
+            }
+          />
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<NoPageFound />} />
         </Routes>
