@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { Progressbar } from './features/components/progress_bar/Progressbar';
 import {
   AuthProvider,
   useAuth,
@@ -25,6 +26,7 @@ export default function App() {
   return (
     <div>
       <AuthProvider>
+        <Progressbar />
         <Navigation />
         <Routes>
           <Route path="/stopwatch" element={<Stopwatch />} />
